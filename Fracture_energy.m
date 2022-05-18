@@ -32,13 +32,13 @@ G = ((K_1.^2) ./ E) * 1000; % [J/mm]
 
 inx = 1;
 G_iSum = 0;
-G_mean = zeros(1,length(G)/5)
+G_mean = zeros(1,length(G)/5);
 for i = 1:length(G)
     G_iSum = G_iSum + G(i);
     if rem(i,5) == 0
         G_mean(inx) = G_iSum/5;
         inx = inx + 1;
-        G_iSum = 0
+        G_iSum = 0;
     end
 
 end
@@ -48,22 +48,43 @@ end
 % Relates geometery to fracture energy
 close
 
-figure()
+figure(1)
 bar(G_mean)
 
 title('Fracture Energy vs Geometery')
-ylabel('Fracture Energy')
+ylabel('Fracture energy')
 xlabel('Geometery')
 grid
-ylim([0 max(G_mean+2E3)])
+ylim([0 max(G_mean+2E2)])
 % Set ticks
 % xticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
 % xticklabels({'','3d_d1s1t1','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
 
+%%
 
 % Subplot fracture energy of geometery
+figure(2)
 
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
 
+G_sub = 0;
+for k = 1:length(G_mean)
+
+    if rem(k,3) == 0       
+        subplot(2,4,k/3)
+        G_sub = [G_mean(k-2),G_mean(k-1),G_mean(k)];
+        bar(G_sub)
+        xticklabels({'t=1','t=2','t=4'})
+        ylabel('Fracture energy')
+%         ylim([0 max(G_mean+1E3)])
+        title(tph(k/3))
+        grid
+    end
+end
+
+sgtitle('Fracture energy vs Height')
 
 
 
