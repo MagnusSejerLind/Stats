@@ -46,24 +46,25 @@ end
 
 %% Bar plot of fracture energy
 % Relates geometery to fracture energy
-close
-
-figure(1)
-bar(G_mean)
-
-title('Fracture Energy vs Geometery')
-ylabel('Fracture energy')
-xlabel('Geometery')
-grid
-ylim([0 max(G_mean+2E2)])
-% Set ticks
+% close
+% 
+% figure(1)
+% bar(G_mean)
+% 
+% title('Fracture Energy vs Geometery')
+% ylabel('Fracture energy')
+% xlabel('Geometery')
+% grid
+% ylim([0 max(G_mean+2E2)])
+% % Set ticks
 % xticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
 % xticklabels({'','3d_d1s1t1','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
 
-%%
+%% Bar plot of fracture energy to height
 
 % Subplot fracture energy of geometery
 figure(2)
+sgtitle('Fracture energy vs Height')
 
 % Titles
 tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
@@ -84,8 +85,28 @@ for k = 1:length(G_mean)
     end
 end
 
-sgtitle('Fracture energy vs Height')
 
 
+%% Bar plot of fracture energy to Spacing
 
+% Exclude 3D
+G_mean_mod = G_mean(4:end);
+
+
+figure(3)
+sgtitle('Fracture energy vs Spacing')
+
+% Titles
+tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
+tph = split(tph);
+
+for i = 1:length(G_mean_mod)/3
+    subplot(2,3,i)
+    G_subn = [G_mean_mod(i),G_mean_mod(i+3),G_mean_mod(i+6)];
+    bar(G_subn)
+    xticklabels({'s=1','s=2','s=4'})
+    ylabel('Fracture energy')
+    title(tph(i))
+    grid
+end
 
