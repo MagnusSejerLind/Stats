@@ -64,7 +64,7 @@ ylim([0 max(G_mean+2E3)])
 % Subplot fracture energy of geometery
 
 
-2+2
+
 
 
 
