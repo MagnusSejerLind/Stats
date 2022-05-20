@@ -100,6 +100,7 @@ sgtitle('Fracture energy vs Spacing')
 tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
 tph = split(tph);
 
+
 for i = 1:length(G_mean_mod)/3
     subplot(2,3,i)
     G_subn = [G_mean_mod(i),G_mean_mod(i+3),G_mean_mod(i+6)];
@@ -113,16 +114,28 @@ end
 
 %% Confidence interval
 
-% Example
+    % Example
 % load examgrades
 % x = grades(:,1);
-% 
-% 
 % pd = fitdist(x,'Normal')
 % ci = paramci(pd,'Alpha',.01)
 
+% First experiment (3d_d1s1t1)
+G3111 = G(1:5);
+% Assuming normal distrubition for each experiments
+NormD = fitdist(G3111','Normal');
+fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma)
 
+% Confidence interval for 95%
+ci = paramci(NormD,'alpha',0.5)
 
+G3111_m = mean(G3111);
+figure(4) 
+hold on
+bar(G3111_m)
+plot(ci(1,1),'*')
+plot(ci(2,1),'*')
+hold off
 
-
+% boxplot(G3111)
 
