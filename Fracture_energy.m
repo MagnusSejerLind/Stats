@@ -110,3 +110,19 @@ for i = 1:length(G_mean_mod)/3
     grid
 end
 
+
+%% Confidence interval
+
+% Example
+% load examgrades
+% x = grades(:,1);
+% 
+% 
+% pd = fitdist(x,'Normal')
+% ci = paramci(pd,'Alpha',.01)
+
+
+
+
+
+
