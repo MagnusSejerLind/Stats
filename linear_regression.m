@@ -1,51 +1,12 @@
-clc,clear
+clc; clear variables; close all
 
-% Load current directory
-datastruct = dir;
-
-% Convert to table
-datatable = struct2table(datastruct);
-
-
-
-for i = 3:107
-
-curdatname = datatable(i,1); % Data name
-
-a(i-2) = table2cell(curdatname); % Convert to cell
-
-curfilename = char(a(i-2));     % Convert to string
-
-data(i-2) = importdata(curfilename); % import data
-
-
-end
-
-
-data(4).name = [];  % Name column
-
-
-% Insert file name in name column
-for i = 3:107
-
-curdatname = datatable(i,1); % Data name
-
-a(i-2) = table2cell(curdatname); % Convert to cell
-
-
-    data(i-2).name = a(i-2); % Insert into data struct
-    
-end
-clearvars curfilename curdatname
-
-% Save data
-save('expdata.mat','data')
+load('cordata.mat');
 
 
 % Divide data up into test restricted by pillar width
-test_3d = data(:,1:15);
-test_d1 = data(:,16:60);
-test_d2 = data(:,61:105);
+test_3d = exp(:,1:15);
+test_d1 = exp(:,16:60);
+test_d2 = exp(:,61:105);
 
 
 %plot(test_3d(14).data(:,3),test_3d(14).data(:,1))
