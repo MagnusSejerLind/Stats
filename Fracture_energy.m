@@ -137,42 +137,37 @@ plot(ci(1,1),'*')
 plot(ci(2,1),'*')
 hold off
 
-%%
+%% box
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% Box plot %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Replacates the bar plots as box plots
 
+%% Box G vs height
+
+no = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
 
 
 figure(5)
+sgtitle('Fracture Energy vs Height')
 
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
+
+G_sub = 0;
 for i = 1:length(G)
-    
-
-
-
+    if rem(i,15)==0
+        G_sub = G(i-14:i);
+        subplot(2,4,i/15)
+        boxplot(G_sub,no,'BoxStyle','outline')
+        title(tph(i/15))
+        xlabel('Height [mm]')
+        grid
+    end
 end
 
 
-% G_sub = 0;
-% for kk = 1:length(G_mean)
-% 
-%     if rem(k,3) == 0       
-%         subplot(2,4,kk/3)
-%         G_sub = [G_mean(kk-2),G_mean(kk-1),G_mean(kk)];
-%         bar(G_sub)
-%         xticklabels({'t=1','t=2','t=4'})
-%         ylabel('Fracture energy')
-% %         ylim([0 max(G_mean+1E3)])
-% %         title(tph(k/3))
-%         grid
-%     end
-% end
-
-
-
-
-
+%% box G vs Spacing
 
 
