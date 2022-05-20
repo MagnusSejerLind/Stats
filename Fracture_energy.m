@@ -1,3 +1,4 @@
+%% Determine Fracture energy 
 clc,clear,close all
 
 corexp = importdata("cordata.mat");
@@ -110,7 +111,6 @@ for i = 1:length(G_mean_mod)/3
     grid
 end
 
-<<<<<<< HEAD
 
 %% Confidence interval
 
@@ -145,11 +145,16 @@ hold off
 
 %% Box G vs height
 
-no = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
+noa = ones(1,5);  
+nob = repmat(2,1,5);
+noc = repmat(4,1,5);
+
+no = cat(2,noa,nob,noc);
 
 
 figure(5)
 sgtitle('Fracture Energy vs Height')
+
 
 % Titles
 tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
@@ -160,7 +165,7 @@ for i = 1:length(G)
     if rem(i,15)==0
         G_sub = G(i-14:i);
         subplot(2,4,i/15)
-        boxplot(G_sub,no,'BoxStyle','outline')
+        boxplot(G_sub,no)
         title(tph(i/15))
         xlabel('Height [mm]')
         grid
