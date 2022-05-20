@@ -361,4 +361,4 @@ grid on
 title('2D linear regression of the elastic region','Varying pillar spacing | d=1 [mm] t=1 [mm]')
 legend('s = 1[mm] | k = 326.86[N/mm]','s = 2[mm] | k = 266.29[N/mm]','s = 4[mm] | k = 179.52[N/mm]',Location='southeast')
 xlabel('Extension [mm]')
-ylabel('Load [N]')
+ylabel('Load [N]')s
