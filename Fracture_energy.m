@@ -1,4 +1,3 @@
-%% Determine fracture energy
 clc,clear,close all
 
 corexp = importdata("cordata.mat");
@@ -41,6 +40,7 @@ for i = 1:length(G)
         inx = inx + 1;
         G_iSum = 0;
     end
+
 end
 
 
@@ -64,7 +64,7 @@ end
 
 % Subplot fracture energy of geometery
 figure(2)
-sgtitle('Fracture Energy vs Height')
+sgtitle('Fracture energy vs Height')
 
 % Titles
 tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
@@ -94,12 +94,11 @@ G_mean_mod = G_mean(4:end);
 
 
 figure(3)
-sgtitle('Fracture Energy vs Spacing')
+sgtitle('Fracture energy vs Spacing')
 
 % Titles
 tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
 tph = split(tph);
-
 
 for i = 1:length(G_mean_mod)/3
     subplot(2,3,i)
@@ -110,69 +109,4 @@ for i = 1:length(G_mean_mod)/3
     title(tph(i))
     grid
 end
-
-
-%% Confidence interval
-
-    % Example
-% load examgrades
-% x = grades(:,1);
-% pd = fitdist(x,'Normal')
-% ci = paramci(pd,'Alpha',.01)
-
-% First experiment (3d_d1s1t1)
-G3111 = G(1:5);
-% Assuming normal distrubition for each experiments
-NormD = fitdist(G3111','Normal');
-fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma)
-
-% Confidence interval for 95%
-ci = paramci(NormD,'alpha',0.5)
-
-G3111_m = mean(G3111);
-figure(4) 
-hold on
-bar(G3111_m)
-plot(ci(1,1),'*')
-plot(ci(2,1),'*')
-hold off
-
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%% Box plot %%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Replacates the bar plots as box plots
-
-
-
-figure(5)
-
-for i = 1:length(G)
-    
-
-
-
-end
-
-
-% G_sub = 0;
-% for kk = 1:length(G_mean)
-% 
-%     if rem(k,3) == 0       
-%         subplot(2,4,kk/3)
-%         G_sub = [G_mean(kk-2),G_mean(kk-1),G_mean(kk)];
-%         bar(G_sub)
-%         xticklabels({'t=1','t=2','t=4'})
-%         ylabel('Fracture energy')
-% %         ylim([0 max(G_mean+1E3)])
-% %         title(tph(k/3))
-%         grid
-%     end
-% end
-
-
-
-
-
-
 
