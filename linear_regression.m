@@ -11,8 +11,8 @@ test_d2 = exp(:,61:105);
 %plot(test_3d(14).data(:,3),test_3d(14).data(:,1))
 
 extension_vec = linspace(0,1,100000);
-
-%% Normalization of paramaters
+ 
+%Normalization of paramaters
 
 b = 15; % Specimen depth
 w = 45; % Specimen width
@@ -49,6 +49,18 @@ M_area_s = t*L-floor(n_unit).*s.*t;
 
 s_2v = M_area_s(1)/M_area_s(2);
 s_4v = M_area_s(1)/M_area_s(3);
+
+%% Variation in d
+d = [1 2];
+t = 1;
+s = 1;
+
+unit = s + d;
+n_unit = L./unit;
+
+M_area_d = t*L-floor(n_unit)*s*t;
+
+d_2v = M_area_d(2)/M_area_d(1);
 
 %% 3d linear regression comparison
 for i = 1:5
@@ -398,5 +410,56 @@ hold off
 grid on
 title('2D linear regression of the elastic region','Varying pillar spacing | d=1 [mm] t=1 [mm]')
 legend('s = 1[mm] | k = 326.86[N/mm]','s = 2[mm] | k = 266.29[N/mm]','s = 4[mm] | k = 179.52[N/mm]',Location='southeast')
+xlabel('Extension [mm]')
+ylabel('Load [N]')
+
+%% Test linear regression comparison - Varying pillar width
+for i = 1:5
+    load = test_d1(i).data(:,1);
+    extension = test_d1(i).data(:,3);
+
+    [M,I] = max(load);
+
+    y = load(I-30:I-5);
+    x = extension(I-30:I-5);
+    
+
+    % Store linear regression coefficients
+    alpha_test1(i,[1 2]) = polyfit(x,y,1);
+
+end
+
+% Determine the mean linear regression of the 5 identical tests:
+mean_linereg1a = mean(alpha_test1(:,1))*d_2v;
+mean_linereg1b = mean(alpha_test1(:,2));
+
+for i = 1:5
+    load = test_d2(i).data(:,1);
+    extension = test_d2(i).data(:,3);
+
+    [M,I] = max(load);
+
+    y = load(I-30:I-5);
+    x = extension(I-30:I-5);
+    
+
+    % Store linear regression coefficients
+    alpha_test1(i,[1 2]) = polyfit(x,y,1);
+
+end
+
+% Determine the mean linear regression of the 5 identical tests:
+mean_linereg2a = mean(alpha_test1(:,1));
+mean_linereg2b = mean(alpha_test1(:,2));
+
+
+% Plot the mean linear regressions for the tests of varying height
+plot(extension_vec,mean_linereg1a*extension_vec+mean_linereg1b)
+hold on
+plot(extension_vec,mean_linereg2a*extension_vec+mean_linereg2b)
+hold off
+grid on
+title('2D linear regression of the elastic region','Varying pillar spacing | d=1 [mm] t=1 [mm]')
+legend('s = 1[mm] | k = 326.86[N/mm]','s = 2[mm] | k = 266.29[N/mm]',Location='southeast')
 xlabel('Extension [mm]')
 ylabel('Load [N]')
