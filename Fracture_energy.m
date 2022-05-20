@@ -110,3 +110,64 @@ for i = 1:length(G_mean_mod)/3
     grid
 end
 
+<<<<<<< HEAD
+
+%% Confidence interval
+
+    % Example
+% load examgrades
+% x = grades(:,1);
+% pd = fitdist(x,'Normal')
+% ci = paramci(pd,'Alpha',.01)
+
+% First experiment (3d_d1s1t1)
+G3111 = G(1:5);
+% Assuming normal distrubition for each experiments
+NormD = fitdist(G3111','Normal');
+fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma)
+
+% Confidence interval for 95%
+ci = paramci(NormD,'alpha',0.5)
+
+G3111_m = mean(G3111);
+figure(4) 
+hold on
+bar(G3111_m)
+plot(ci(1,1),'*')
+plot(ci(2,1),'*')
+hold off
+
+%% box
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Box plot %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Replacates the bar plots as box plots
+
+%% Box G vs height
+
+no = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
+
+
+figure(5)
+sgtitle('Fracture Energy vs Height')
+
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
+
+G_sub = 0;
+for i = 1:length(G)
+    if rem(i,15)==0
+        G_sub = G(i-14:i);
+        subplot(2,4,i/15)
+        boxplot(G_sub,no,'BoxStyle','outline')
+        title(tph(i/15))
+        xlabel('Height [mm]')
+        grid
+    end
+end
+
+
+%% box G vs Spacing
+
+
