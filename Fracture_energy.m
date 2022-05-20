@@ -1,4 +1,3 @@
-%% Determine fracture energy
 clc,clear,close all
 
 corexp = importdata("cordata.mat");
@@ -41,6 +40,7 @@ for i = 1:length(G)
         inx = inx + 1;
         G_iSum = 0;
     end
+
 end
 
 
@@ -64,7 +64,7 @@ end
 
 % Subplot fracture energy of geometery
 figure(2)
-sgtitle('Fracture Energy vs Height')
+sgtitle('Fracture energy vs Height')
 
 % Titles
 tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
@@ -94,12 +94,11 @@ G_mean_mod = G_mean(4:end);
 
 
 figure(3)
-sgtitle('Fracture Energy vs Spacing')
+sgtitle('Fracture energy vs Spacing')
 
 % Titles
 tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
 tph = split(tph);
-
 
 for i = 1:length(G_mean_mod)/3
     subplot(2,3,i)
@@ -111,6 +110,7 @@ for i = 1:length(G_mean_mod)/3
     grid
 end
 
+<<<<<<< HEAD
 
 %% Confidence interval
 
