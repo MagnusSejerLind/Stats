@@ -109,4 +109,4 @@ for i = 1:length(G_mean_mod)/3
     title(tph(i))
     grid
 end
-
+rasmus
