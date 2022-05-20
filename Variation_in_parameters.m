@@ -21,4 +21,5 @@ M_area = t_max*L-floor(n_unit)*s*t;
 t_2v = M_area(1)/M_area(2);
 t_4v = M_area(1)/M_area(3);
 
+
 %% Variation in s

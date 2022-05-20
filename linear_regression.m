@@ -12,6 +12,44 @@ test_d2 = exp(:,61:105);
 
 extension_vec = linspace(0,1,100000);
 
+%% Normalization of paramaters
+
+b = 15; % Specimen depth
+w = 45; % Specimen width
+a = 22; % Crack length at onset
+L = w-a; %length of the materials
+
+%% Variation in t
+t = [1 2 4];
+s = 1;
+d = 1;
+
+t_max = max(t);
+
+unit = s + d;
+n_unit = L/unit;
+
+M_area_t = t_max*L-floor(n_unit)*s*t;
+
+t_2v = M_area_t(1)/M_area_t(2);
+t_4v = M_area_t(1)/M_area_t(3);
+
+
+%% Variation in s
+s = [1 2 4];
+t = 1;
+d = 1;
+
+s_max = max(s);
+
+unit = s + d;
+n_unit = L./unit;
+
+M_area_s = t*L-floor(n_unit).*s.*t;
+
+s_2v = M_area_s(1)/M_area_s(2);
+s_4v = M_area_s(1)/M_area_s(3);
+
 %% 3d linear regression comparison
 for i = 1:5
     load = test_3d(i).data(:,1);
@@ -49,7 +87,7 @@ for i = 6:10
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg2a = mean(alpha_test1(:,1));
+mean_linereg2a = mean(alpha_test1(:,1))*t_2v;
 mean_linereg2b = mean(alpha_test1(:,2));
 
 for i = 11:15
@@ -68,7 +106,7 @@ for i = 11:15
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg3a = mean(alpha_test1(:,1));
+mean_linereg3a = mean(alpha_test1(:,1))*t_4v;
 mean_linereg3b = mean(alpha_test1(:,2));
 
 % Plot the mean linear regressions for the tests of varying height
@@ -329,7 +367,7 @@ for i = 16:20
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg2a = mean(alpha_test1(:,1));
+mean_linereg2a = mean(alpha_test1(:,1))*s_2v;
 mean_linereg2b = mean(alpha_test1(:,2));
 
 for i = 31:35
@@ -348,7 +386,7 @@ for i = 31:35
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg3a = mean(alpha_test1(:,1));
+mean_linereg3a = mean(alpha_test1(:,1))*s_4v;
 mean_linereg3b = mean(alpha_test1(:,2));
 
 % Plot the mean linear regressions for the tests of varying height
@@ -361,4 +399,4 @@ grid on
 title('2D linear regression of the elastic region','Varying pillar spacing | d=1 [mm] t=1 [mm]')
 legend('s = 1[mm] | k = 326.86[N/mm]','s = 2[mm] | k = 266.29[N/mm]','s = 4[mm] | k = 179.52[N/mm]',Location='southeast')
 xlabel('Extension [mm]')
-ylabel('Load [N]')s
+ylabel('Load [N]')
