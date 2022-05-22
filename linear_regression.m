@@ -129,7 +129,7 @@ plot(extension_vec,mean_linereg3a*extension_vec+mean_linereg3b)
 hold off
 grid on
 title('3D linear regression of the elastic region','Varying pillar height | d=1 [mm] s=1 [mm]')
-legend('t = 1[mm] | k = 527.76[N/mm]','t = 2[mm] | k = 420.78[N/mm]','t = 4[mm] | k = 401.40[N/mm]',Location='southeast')
+legend('t = 1[mm] | k = 527.76[N/mm]','t = 2[mm] | k = 486.90[N/mm]','t = 4[mm] | k = 677.36[N/mm]',Location='southeast')
 xlabel('Extension [mm]')
 ylabel('Load [N]')
 
@@ -169,7 +169,7 @@ for i = 6:10
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg2a = mean(alpha_test1(:,1));
+mean_linereg2a = mean(alpha_test1(:,1))*t_2v;
 mean_linereg2b = mean(alpha_test1(:,2));
 
 for i = 11:15
@@ -188,7 +188,7 @@ for i = 11:15
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg3a = mean(alpha_test1(:,1));
+mean_linereg3a = mean(alpha_test1(:,1))*t_4v;
 mean_linereg3b = mean(alpha_test1(:,2));
 
 % Plot the mean linear regressions for the tests of varying height
@@ -239,7 +239,7 @@ for i = 21:25
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg2a = mean(alpha_test1(:,1));
+mean_linereg2a = mean(alpha_test1(:,1))*t_2v;
 mean_linereg2b = mean(alpha_test1(:,2));
 
 for i = 26:30
@@ -258,7 +258,7 @@ for i = 26:30
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg3a = mean(alpha_test1(:,1));
+mean_linereg3a = mean(alpha_test1(:,1))*t_2v;
 mean_linereg3b = mean(alpha_test1(:,2));
 
 % Plot the mean linear regressions for the tests of varying height
@@ -290,7 +290,7 @@ for i = 31:35
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg1a = mean(alpha_test1(:,1));
+mean_linereg1a = mean(alpha_test1(:,1))*t_2v;
 mean_linereg1b = mean(alpha_test1(:,2));
 
 for i = 36:40
@@ -309,7 +309,7 @@ for i = 36:40
 end
 
 % Determine the mean linear regression of the 5 identical tests:
-mean_linereg2a = mean(alpha_test1(:,1));
+mean_linereg2a = mean(alpha_test1(:,1))*t_4v;
 mean_linereg2b = mean(alpha_test1(:,2));
 
 for i = 41:45
