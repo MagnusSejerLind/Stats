@@ -3,7 +3,7 @@ clc,clear,close all
 
 corexp = importdata("cordata.mat");
 
-b = 15;  % [mm]
+tnb = 15;  % [mm]
 w = 45;  % [mm]
 a = 22;  % [mm]
 f = -4.5680;  % f(a/w)
@@ -15,7 +15,7 @@ K_1 = F;
 for i = 1:105
     F(i) = max(corexp(i).data(:,1));
 
-    K_1(i) = ( (F(i)) / (b * sqrt(w)) ) * f; 
+    K_1(i) = ( (F(i)) / (tnb * sqrt(w)) ) * f; 
 
 end
 K_1 = K_1';
@@ -26,7 +26,7 @@ G = ((K_1.^2) ./ E) * 1000; % [J/mm]
 
 % plot(G,'.')
 % bar(G)
-
+clearvars b w a f E
 
 %% Fracture energy mean
 % Determine mean fracture energy for each geometery
@@ -62,29 +62,29 @@ end
 % xticklabels({'','3d_d1s1t1','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
 
 %% Bar plot of fracture energy to height
-
-% Subplot fracture energy of geometery
-figure(2)
-sgtitle('Fracture energy vs Height')
-
-% Titles
-tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
-tph = split(tph);
-
-G_sub = 0;
-for k = 1:length(G_mean)
-
-    if rem(k,3) == 0       
-        subplot(2,4,k/3)
-        G_sub = [G_mean(k-2),G_mean(k-1),G_mean(k)];
-        bar(G_sub)
-        xticklabels({'t=1','t=2','t=4'})
-        ylabel('Fracture energy')
-%         ylim([0 max(G_mean+1E3)])
-        title(tph(k/3))
-        grid
-    end
-end
+% 
+% % Subplot fracture energy of geometery
+% figure(2)
+% sgtitle('Fracture energy vs Height')
+% 
+% % Titles
+% tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+% tph = split(tph);
+% 
+% G_sub = 0;
+% for k = 1:length(G_mean)
+% 
+%     if rem(k,3) == 0       
+%         subplot(2,4,k/3)
+%         G_sub = [G_mean(k-2),G_mean(k-1),G_mean(k)];
+%         bar(G_sub)
+%         xticklabels({'t=1','t=2','t=4'})
+%         ylabel('Fracture energy')
+% %         ylim([0 max(G_mean+1E3)])
+%         title(tph(k/3))
+%         grid
+%     end
+% end
 
 
 
@@ -124,10 +124,10 @@ end
 G3111 = G(1:5);
 % Assuming normal distrubition for each experiments
 NormD = fitdist(G3111','Normal');
-fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma)
+fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma);
 
 % Confidence interval for 95%
-ci = paramci(NormD,'alpha',0.5)
+ci = paramci(NormD,'alpha',0.5);
 
 G3111_m = mean(G3111);
 figure(4) 
@@ -137,19 +137,17 @@ plot(ci(1,1),'*')
 plot(ci(2,1),'*')
 hold off
 
-%% box
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% Box plot %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Replacates the bar plots as box plots
-
 %% Box G vs height
 
-noa = ones(1,5);  
+tna = ones(1,5);  
 nob = repmat(2,1,5);
-noc = repmat(4,1,5);
+tnc = repmat(4,1,5);
 
-no = cat(2,noa,nob,noc);
+tn = cat(2,tna,nob,tnc);
 
 
 figure(5)
@@ -165,7 +163,7 @@ for i = 1:length(G)
     if rem(i,15)==0
         G_sub = G(i-14:i);
         subplot(2,4,i/15)
-        boxplot(G_sub,no)
+        boxplot(G_sub,tn)
         title(tph(i/15))
         xlabel('Height [mm]')
         grid
@@ -177,11 +175,11 @@ sgtitle('Fracture Energy vs Height')
 
 %% Box G vs height - tile
 
-noa = ones(1,5);  
-nob = repmat(2,1,5);
-noc = repmat(4,1,5);
+tna = ones(1,5);  
+tnb = repmat(2,1,5);
+tnc= repmat(4,1,5);
 
-no = cat(2,noa,nob,noc);
+tn = cat(2,tna,tnb,tnc);
 
 
 figure(6)
@@ -191,14 +189,14 @@ figure(6)
 tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
 tph = split(tph);
 
-t = tiledlayout(2,4)
+t = tiledlayout(2,4);
 title(t,'Fracture Energy vs Height')
 G_sub = 0;
 for i = 1:length(G)
     if rem(i,15)==0
         G_sub = G(i-14:i);
         nexttile
-        boxchart(no,G_sub)
+        boxchart(tn,G_sub)
 %         boxplot(G_sub,no)
         title(tph(i/15))
         xlabel('Height [mm]')
@@ -208,6 +206,35 @@ end
 
 
 
-%% box G vs Spacing
+%% box G vs Spacing - tile
+
+
+figure(7)
+% Exclude 3D
+G_mod = G(4:end);
+
+sn = tn;
+
+
+% Titles
+tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
+tph = split(tph);
+
+t = tiledlayout(2,3);
+title(t,'Fracture Energy vs Spacing')
+
+% for i = 1:length(G_mean_mod)/3
+    nexttile
+
+    G_subn = [G(1:5),G(16:20),G(31:35)]; 
+
+
+
+%     G_subn = [G_mod(i),G_mod(i+3),G_mod(i+6)];
+    boxchart(sn,G_subn)
+    xticklabels({'s=1','s=2','s=4'})
+    ylabel('Fracture energy')
+    grid
+% end
 
 
