@@ -132,6 +132,117 @@ for i = 16:105
     end
 
 end
+%% box plot 2D - vs height
+% d1
+    % s1
+
+s1d1 = zeros(1,15);
+for i = 1:15
+
+    if i <= 5
+        
+        s1d1(i) = max_f_d1s1t1(i);
+        
+    elseif i >= 6 && i <= 10
+
+        s1d1(i) = max_f_d1s1t2(i-5);
+
+    else
+        s1d1(i) = max_f_d1s1t4(i-10);
+
+    end
+end
+    
+    % t2
+s2d1 = zeros(1,15);
+for i = 1:15
+
+    if i <= 5
+        
+        s2d1(i) = max_f_d1s2t1(i);
+        
+    elseif i >= 6 && i <= 10
+
+        s2d1(i) = max_f_d1s2t2(i-5);
+
+    else
+        s2d1(i) = max_f_d1s2t4(i-10);
+
+    end
+end
+
+    % t4
+s4d1 = zeros(1,15);
+for i = 1:15
+
+    if i <= 5
+        
+        s4d1(i) = max_f_d1s4t1(i);
+        
+    elseif i >= 6 && i <= 10
+
+        s4d1(i) = max_f_d1s4t2(i-5);
+
+    else
+        s4d1(i) = max_f_d1s4t4(i-10);
+
+    end
+end
+
+% d2
+    % t1
+s1d2 = zeros(1,15);
+for i = 1:15
+
+    if i <= 5
+        
+        s1d2(i) = max_f_d2s1t1(i);
+        
+    elseif i >= 6 && i <= 10
+
+        s1d2(i) = max_f_d2s1t2(i-5);
+
+    else
+        s1d2(i) = max_f_d2s1t4(i-10);
+
+    end
+end
+    
+    % t2
+s2d2 = zeros(1,15);
+for i = 1:15
+
+    if i <= 5
+        
+        s2d2(i) = max_f_d2s2t1(i);
+        
+    elseif i >= 6 && i <= 10
+
+        s2d2(i) = max_f_d2s2t2(i-5);
+
+    else
+        s2d2(i) = max_f_d2s2t4(i-10);
+
+    end
+end
+
+    % t4
+s4d2 = zeros(1,15);
+for i = 1:15
+
+    if i <= 5
+        
+        s4d2(i) = max_f_d2s4t1(i);
+        
+    elseif i >= 6 && i <= 10
+
+        s4d2(i) = max_f_d2s4t2(i-5);
+
+    else
+        s4d2(i) = max_f_d2s4t4(i-10);
+
+    end
+end
 
 %% box plot 2D - vs spacing    
 
@@ -247,56 +358,52 @@ for i = 1:15
 end
 
 %% box plot of 2D samples
-s = ['1 1 1 1 1 2 2 2 2 2 4 4 4 4 4'];
-s = split(s);
 
-s = s';
-
-
-
+s = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
+ 
 figure(7)
-% sgtitle('Width = 1 [mm]')
-% subplot(1,3,1)
+% d = 1
+t = tiledlayout(2,3);
 
-t = tiledlayout(2,3)
 nexttile
-boxchart(s,t1d1)
+boxchart(s,t1d1);
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
-subplot(1,3,2)
-boxplot(t2d1,s)
+nexttile
+
+boxchart(s,t2d1);
 title('height = 2 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
-subplot(1,3,3)
-boxplot(t4d1,s)
+nexttile
+boxchart(s,t4d1);
 title('height = 4 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 sgtitle('Width = 1 [mm]')
 
-figure(8)
-sgtitle('Width = 2 [mm]')
-subplot(1,3,1)
-boxplot(t1d2,s)
+% d = 2
+nexttile
+boxchart(s,t1d2)
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
-subplot(1,3,2)
-boxplot(t2d2,s)
+nexttile
+boxchart(s,t2d2)
 title('height = 2 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
-subplot(1,3,3)
-boxplot(t4d2,s)
+nexttile
+boxchart(s,t4d2)
 title('height = 4 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
+title(t,'Max force vs spacing')
 
 %% box plot of 3D samples
 figure(6)
@@ -315,11 +422,14 @@ for i = 1:15
 
 end
 
-x6 = ('1 1 1 1 1 2 2 2 2 2 4 4 4 4 4');
-x6 = split(x6);
 
-boxplot(max_f3D,x6)
-title('3D max force')
+% x6 = ('1 1 1 1 1 2 2 2 2 2 4 4 4 4 4');
+% x6 = split(x6);
+x6 = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
+
+t = tiledlayout(2,3);
+boxchart(x6,max_f3D)
+title(t,'3D max force')
 xlabel('height [mm]')
 ylabel('max force applied [N]')
 hold off
@@ -351,7 +461,7 @@ m_max_f_d2s4t1 = mean(max_f_d2s4t1);
 m_max_f_d2s4t2 = mean(max_f_d2s4t2);
 m_max_f_d2s4t4 = mean(max_f_d2s4t4);
 
-%% Plot
+%% Stem
 
 x = [1 2 4]; % height [t1,t2,t4]
 y1 = [1 1 1]; % s1
@@ -555,3 +665,219 @@ bar(variance(10:18))
 xticklabels(v2)
 title('Variance of max force - d2 - Width [2 mm]')
 hold off
+
+%% Normalizing max force w.r.t material used
+%Normalization of paramaters
+
+b = 15; % Specimen depth
+w = 45; % Specimen width
+a = 22; % Crack length at onset
+L = w-a; %length of the materials
+
+% Variation in s
+s = [1 2 4];
+t = 1;
+d = 1;
+
+s_max = max(s);
+
+unit = s + d;
+n_unit = L./unit;
+
+M_area_s = t*L-floor(n_unit).*s.*t;
+
+s_2v = M_area_s(1)/M_area_s(2);
+s_4v = M_area_s(1)/M_area_s(3);
+
+% normalizing
+for i = 6:15
+    if i >= 6 && i <= 10
+        t1d1(i) = s_2v * t1d1(i);
+        t1d2(i) = s_2v * t1d2(i);
+        t2d1(i) = s_2v * t2d1(i);
+        t2d2(i) = s_2v * t2d2(i);
+        t4d1(i) = s_2v * t4d1(i);
+        t4d2(i) = s_2v * t4d2(i);
+
+    elseif i >= 11
+        t1d1(i) = s_4v * t1d1(i);
+        t1d2(i) = s_4v * t1d2(i);
+        t2d1(i) = s_4v * t2d1(i);
+        t2d2(i) = s_4v * t2d2(i);
+        t4d1(i) = s_4v * t4d1(i);
+        t4d2(i) = s_4v * t4d2(i);
+    end
+end
+      
+% plot Variation in s 
+s = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
+figure(9)
+% d = 1
+t = tiledlayout(2,3);
+
+nexttile
+boxchart(s,t1d1);
+title('height = 1 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+
+boxchart(s,t2d1);
+title('height = 2 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,t4d1);
+title('height = 4 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+sgtitle('Width = 1 [mm]')
+
+% d = 2
+nexttile
+boxchart(s,t1d2)
+title('height = 1 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,t2d2)
+title('height = 2 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,t4d2)
+title('height = 4 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+title(t,'Normalized max force vs spacing')
+
+% plot variation in t
+figure(10)
+% d = 1
+t = tiledlayout(2,3);
+
+nexttile
+boxchart(s,s1d1);
+title('height = 1 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+
+boxchart(s,s2d1);
+title('height = 2 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,s4d1);
+title('height = 4 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+sgtitle('Width = 1 [mm]')
+
+% d = 2
+nexttile
+boxchart(s,s1d2)
+title('Spacing = 1 [mm]')
+xlabel('height [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,s2d2)
+title('Spacing = 2 [mm]')
+xlabel('height [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,s4d2)
+title('Spacing = 4 [mm]')
+xlabel('height [mm]')
+ylabel('max force [N]')
+title(t,'Max force vs height')
+
+% Variation in height
+t = [1 2 4];
+s = 1;
+d = 1;
+
+t_max = max(t);
+
+unit = s + d;
+n_unit = L/unit;
+
+M_area_t = t_max*L-floor(n_unit)*s*t;
+
+t_2v = M_area_t(1)/M_area_t(2);
+t_4v = M_area_t(1)/M_area_t(3);
+
+
+% normalizing
+for i = 6:15
+    if i >= 6 && i <= 10
+        s1d1(i) = t_2v * s1d1(i);
+        s1d2(i) = t_2v * s1d2(i);
+        s2d1(i) = t_2v * s2d1(i);
+        s2d2(i) = t_2v * s2d2(i);
+        s4d1(i) = t_2v * s4d1(i);
+        s4d2(i) = t_2v * s4d2(i);
+
+    elseif i >= 11
+        s1d1(i) = t_4v * s1d1(i);
+        s1d2(i) = t_4v * s1d2(i);
+        s2d1(i) = t_4v * s2d1(i);
+        s2d2(i) = t_4v * s2d2(i);
+        s4d1(i) = t_4v * s4d1(i);
+        s4d2(i) = t_4v * s4d2(i);
+    end
+end
+
+% normalized - plot variation in t 
+s = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
+figure(11)
+% d = 1
+t = tiledlayout(2,3);
+
+nexttile
+boxchart(s,s1d1);
+title('height = 1 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+
+boxchart(s,s2d1);
+title('height = 2 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,s4d1);
+title('height = 4 [mm]')
+xlabel('spacing [mm]')
+ylabel('max force [N]')
+sgtitle('Width = 1 [mm]')
+
+% d = 2
+nexttile
+boxchart(s,s1d2)
+title('Spacing = 1 [mm]')
+xlabel('height [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,s2d2)
+title('Spacing = 2 [mm]')
+xlabel('height [mm]')
+ylabel('max force [N]')
+
+nexttile
+boxchart(s,s4d2)
+title('Spacing = 4 [mm]')
+xlabel('height [mm]')
+ylabel('max force [N]')
+title(t,'Normalized max force vs height')
