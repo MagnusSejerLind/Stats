@@ -110,7 +110,7 @@ for i = 1:length(G_mean_mod)/3
     title(tph(i))
     grid
 end
-
+%%%%%%%%%%%%%%%%%%%%%%%% WRONG  %%%%%%%%%%%%%%%%%%%%%%%
 
 %% Confidence interval
 
@@ -124,7 +124,7 @@ end
 G3111 = G(1:5);
 % Assuming normal distrubition for each experiments
 NormD = fitdist(G3111','Normal');
-fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma);
+% fprintf(' mu = %.3f\n sigma = %.3f\n',NormD.mu,NormD.sigma)
 
 % Confidence interval for 95%
 ci = paramci(NormD,'alpha',0.5);
@@ -141,36 +141,36 @@ hold off
 %%%%%%%%%%%%%%%%% Box plot %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Replacates the bar plots as box plots
-%% Box G vs height
-
-tna = ones(1,5);  
-nob = repmat(2,1,5);
-tnc = repmat(4,1,5);
-
-tn = cat(2,tna,nob,tnc);
-
-
-figure(5)
+% %% Box G vs height
+% 
+% tna = ones(1,5);  
+% nob = repmat(2,1,5);
+% tnc = repmat(4,1,5);
+% 
+% tn = cat(2,tna,nob,tnc);
+% 
+% 
+% figure(5)
+% % sgtitle('Fracture Energy vs Height')
+% 
+% 
+% % Titles
+% tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+% tph = split(tph);
+% 
+% G_sub = 0;
+% for i = 1:length(G)
+%     if rem(i,15)==0
+%         G_sub = G(i-14:i);
+%         subplot(2,4,i/15)
+%         boxplot(G_sub,tn)
+%         title(tph(i/15))
+%         xlabel('Height [mm]')
+%         grid
+%     end
+% end
+% 
 % sgtitle('Fracture Energy vs Height')
-
-
-% Titles
-tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
-tph = split(tph);
-
-G_sub = 0;
-for i = 1:length(G)
-    if rem(i,15)==0
-        G_sub = G(i-14:i);
-        subplot(2,4,i/15)
-        boxplot(G_sub,tn)
-        title(tph(i/15))
-        xlabel('Height [mm]')
-        grid
-    end
-end
-
-sgtitle('Fracture Energy vs Height')
 
 
 %% Box G vs height - tile
@@ -204,14 +204,14 @@ for i = 1:length(G)
     end
 end
 
-
+print('Fracture_energy_boxplot_vs_Height', '-depsc');  
 
 %% box G vs Spacing - tile
 
 
 figure(7)
 % Exclude 3D
-G_mod = G(4:end);
+G_mod = G(16:end);
 
 sn = tn;
 
@@ -223,18 +223,31 @@ tph = split(tph);
 t = tiledlayout(2,3);
 title(t,'Fracture Energy vs Spacing')
 
-% for i = 1:length(G_mean_mod)/3
-    nexttile
+for i = 1:length(G_mod)/3
+    if i < 18
+        if rem(i,5)==0
+            nexttile
+            G_subn = [G_mod(i-4:i),G_mod(i+15-4:i+15),G_mod(i+30-4:i+30)];
+            boxchart(sn,G_subn)
+            title(tph(i/5))
+            xlabel('Spacing [mm]')
+            ylabel('Fracture energy')
+            grid
+        end
 
-    G_subn = [G(1:5),G(16:20),G(31:35)]; 
+    elseif i > 19
 
+        if rem(i,5)==0
+            nexttile
+            G_subn = [G_mod(i-4+30:i+30),G_mod(i+15-4+30:i+15+30),G_mod(i+30-4+30:i+30+30)];
+            boxchart(sn,G_subn)
+            title(tph(i/5))
+            xlabel('Spacing [mm]')
+            ylabel('Fracture energy')
+            grid
+        end
+    end
+end
 
-
-%     G_subn = [G_mod(i),G_mod(i+3),G_mod(i+6)];
-    boxchart(sn,G_subn)
-    xticklabels({'s=1','s=2','s=4'})
-    ylabel('Fracture energy')
-    grid
-% end
-
+print('Fracture_energy_boxplot_vs_Spacing', '-depsc');  
 
