@@ -95,22 +95,23 @@ G_mean_mod = G_mean(4:end);
 
 
 figure(3)
-sgtitle('Fracture energy vs Spacing')
+sgtitle('Fracture energy vs Spacing******NOT CORRECT******')
 
 % Titles
 tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
 tph = split(tph);
 
 for i = 1:length(G_mean_mod)/3
-    subplot(2,3,i)
-    G_subn = [G_mean_mod(i),G_mean_mod(i+3),G_mean_mod(i+6)];
-    bar(G_subn)
-    xticklabels({'s=1','s=2','s=4'})
-    ylabel('Fracture energy')
-    title(tph(i))
-    grid
+        subplot(2,3,i)
+        G_subn = [G_mean_mod(i),G_mean_mod(i+3),G_mean_mod(i+6)];
+        bar(G_subn)
+        xticklabels({'s=1','s=2','s=4'})
+        ylabel('Fracture energy')
+        title(tph(i))
+        grid
+    
 end
-%%%%%%%%%%%%%%%%%%%%%%%% WRONG  %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% NOT CORRECT  %%%%%%%%%%%%%%%%%%%%%%%
 
 %% Confidence interval
 
@@ -196,7 +197,7 @@ for i = 1:length(G)
     if rem(i,15)==0
         G_sub = G(i-14:i);
         nexttile
-        boxchart(tn,G_sub)
+        boxchart(tn,G_sub,'MarkerStyle','x')
 %         boxplot(G_sub,no)
         title(tph(i/15))
         xlabel('Height [mm]')
@@ -228,7 +229,7 @@ for i = 1:length(G_mod)/3
         if rem(i,5)==0
             nexttile
             G_subn = [G_mod(i-4:i),G_mod(i+15-4:i+15),G_mod(i+30-4:i+30)];
-            boxchart(sn,G_subn)
+            boxchart(sn,G_subn,'MarkerStyle','x')
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
@@ -240,7 +241,7 @@ for i = 1:length(G_mod)/3
         if rem(i,5)==0
             nexttile
             G_subn = [G_mod(i-4+30:i+30),G_mod(i+15-4+30:i+15+30),G_mod(i+30-4+30:i+30+30)];
-            boxchart(sn,G_subn)
+            boxchart(sn,G_subn,'MarkerStyle','x')
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
@@ -250,4 +251,21 @@ for i = 1:length(G_mod)/3
 end
 
 print('Fracture_energy_boxplot_vs_Spacing', '-depsc');  
+
+
+
+%% box normalized vs height
+
+
+
+
+
+
+
+
+
+
+
+%% box normalized vs spacing
+
 
