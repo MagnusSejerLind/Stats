@@ -250,10 +250,17 @@ end
 s = ['1 1 1 1 1 2 2 2 2 2 4 4 4 4 4'];
 s = split(s);
 
+s = s';
+
+
+
 figure(7)
-sgtitle('Width = 1 [mm]')
-subplot(1,3,1)
-boxplot(t1d1,s)
+% sgtitle('Width = 1 [mm]')
+% subplot(1,3,1)
+
+t = tiledlayout(2,3)
+nexttile
+boxchart(s,t1d1)
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
