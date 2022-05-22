@@ -153,7 +153,7 @@ no = cat(2,noa,nob,noc);
 
 
 figure(5)
-sgtitle('Fracture Energy vs Height')
+% sgtitle('Fracture Energy vs Height')
 
 
 % Titles
@@ -171,6 +171,41 @@ for i = 1:length(G)
         grid
     end
 end
+
+sgtitle('Fracture Energy vs Height')
+
+
+%% Box G vs height - tile
+
+noa = ones(1,5);  
+nob = repmat(2,1,5);
+noc = repmat(4,1,5);
+
+no = cat(2,noa,nob,noc);
+
+
+figure(6)
+
+
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
+
+t = tiledlayout(2,4)
+title(t,'Fracture Energy vs Height')
+G_sub = 0;
+for i = 1:length(G)
+    if rem(i,15)==0
+        G_sub = G(i-14:i);
+        nexttile
+        boxchart(no,G_sub)
+%         boxplot(G_sub,no)
+        title(tph(i/15))
+        xlabel('Height [mm]')
+        grid
+    end
+end
+
 
 
 %% box G vs Spacing
