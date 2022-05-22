@@ -716,20 +716,20 @@ figure(9)
 t = tiledlayout(2,3);
 
 nexttile
-boxchart(s,t1d1);
+boxchart(s,t1d1,'markerstyle','x');
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
 
-boxchart(s,t2d1);
+boxchart(s,t2d1,'markerstyle','x');
 title('height = 2 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,t4d1);
+boxchart(s,t4d1,'markerstyle','x');
 title('height = 4 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
@@ -737,19 +737,19 @@ sgtitle('Width = 1 [mm]')
 
 % d = 2
 nexttile
-boxchart(s,t1d2)
+boxchart(s,t1d2,'markerstyle','x')
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,t2d2)
+boxchart(s,t2d2,'markerstyle','x')
 title('height = 2 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,t4d2)
+boxchart(s,t4d2,'markerstyle','x')
 title('height = 4 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
@@ -761,20 +761,20 @@ figure(10)
 t = tiledlayout(2,3);
 
 nexttile
-boxchart(s,s1d1);
+boxchart(s,s1d1,'markerstyle','x');
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
 
-boxchart(s,s2d1);
+boxchart(s,s2d1,'markerstyle','x');
 title('height = 2 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,s4d1);
+boxchart(s,s4d1,'markerstyle','x');
 title('height = 4 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
@@ -782,19 +782,19 @@ sgtitle('Width = 1 [mm]')
 
 % d = 2
 nexttile
-boxchart(s,s1d2)
+boxchart(s,s1d2,'markerstyle','x')
 title('Spacing = 1 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,s2d2)
+boxchart(s,s2d2,'markerstyle','x')
 title('Spacing = 2 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,s4d2)
+boxchart(s,s4d2,'markerstyle','x')
 title('Spacing = 4 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
@@ -843,20 +843,20 @@ figure(11)
 t = tiledlayout(2,3);
 
 nexttile
-boxchart(s,s1d1);
+boxchart(s,s1d1,'markerstyle','x');
 title('height = 1 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
 
-boxchart(s,s2d1);
+boxchart(s,s2d1,'markerstyle','x');
 title('height = 2 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,s4d1);
+boxchart(s,s4d1,'markerstyle','x');
 title('height = 4 [mm]')
 xlabel('spacing [mm]')
 ylabel('max force [N]')
@@ -864,19 +864,19 @@ sgtitle('Width = 1 [mm]')
 
 % d = 2
 nexttile
-boxchart(s,s1d2)
+boxchart(s,s1d2,'markerstyle','x')
 title('Spacing = 1 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,s2d2)
+boxchart(s,s2d2,'markerstyle','x')
 title('Spacing = 2 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
 
 nexttile
-boxchart(s,s4d2)
+boxchart(s,s4d2,'markerstyle','x')
 title('Spacing = 4 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
