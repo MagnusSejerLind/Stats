@@ -62,6 +62,10 @@ M_area_d = t*L-floor(n_unit)*s*t;
 
 d_2v = M_area_d(2)/M_area_d(1);
 
+
+% Save norm coeffcients
+save('norm_cof','d_2v',"s_2v","s_4v","t_2v","t_4v")
+
 %% 3d linear regression comparison
 for i = 1:5
     load = test_3d(i).data(:,1);
