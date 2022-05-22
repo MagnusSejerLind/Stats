@@ -251,31 +251,35 @@ print('Fracture_energy_boxplot_vs_Spacing', '-depsc');
 
 %% box normalized vs height
 
-% Load norm coeffcients (Determined in 'Linear-regerssion.m'
-norm_cof = load('norm_cof')
+% Load norm coeffcients (Determined in 'Linear_regerssion.m')
+norm_cof = load('norm_cof');
 
 
-% figure(8)
-% % Titles
+figure(8)
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
+
+t = tiledlayout(2,4);
+title(t,'Norm Fracture Energy vs Height')
+G_sub = 0;
+for i = 1:length(G)
+    if rem(i,15)==0
+        G_sub = G(i-14:i);
+        % Apply norm coefficients
+        G_sub(6:10) = G_sub(6:10) * norm_cof.t_2v;
+        G_sub(11:14) = G_sub(11:14) * norm_cof.t_4v;
+        nexttile
+        boxchart(tn,G_sub,'MarkerStyle','x')
+        title(tph(i/15))
+        xlabel('Height [mm]')
+        grid
+    end
+end
+
+print('Fracture_energy_boxplot_vs_Height_Norm', '-depsc');  
 
 
-% t = tiledlayout(2,4);
-% title(t,'Fracture Energy vs Height')
-% G_sub = 0;
-% for i = 1:length(G)
-%     if rem(i,15)==0
-%         G_sub = G(i-14:i);
-%         nexttile
-%         boxchart(tn,G_sub,'MarkerStyle','x')
-%         title(tph(i/15))
-%         xlabel('Height [mm]')
-%         grid
-%     end
-% end
-% 
-% print('Fracture_energy_boxplot_vs_Height_Norm', '-depsc');  
-% 
-% 
 
 
 
@@ -302,7 +306,8 @@ for i = 1:length(G_mod)/3
 
         if rem(i,5)==0
             nexttile
-            G_subn = [G_mod(i-4+30:i+30),G_mod(i+15-4+30:i+15+30)*norm_cof.s_2v,G_mod(i+30-4+30:i+30+30)*norm_cof.s_4v];
+            G_subn = [G_mod(i-4+30:i+30),G_mod(i+15-4+30:i+15+30)...
+                *norm_cof.s_2v,G_mod(i+30-4+30:i+30+30)*norm_cof.s_4v];
             boxchart(sn,G_subn,'MarkerStyle','x')
             title(tph(i/5))
             xlabel('Spacing [mm]')
