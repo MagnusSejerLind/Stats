@@ -48,43 +48,42 @@ end
 %% Bar plot of fracture energy
 % Relates geometery to fracture energy
 % close
-% 
-% figure(1)
-% bar(G_mean)
-% 
-% title('Fracture Energy vs Geometery')
-% ylabel('Fracture energy')
-% xlabel('Geometery')
-% grid
-% ylim([0 max(G_mean+2E2)])
-% % Set ticks
+
+figure(1)
+bar(G_mean)
+
+title('Fracture Energy vs Geometery')
+ylabel('Fracture energy')
+xlabel('Geometery')
+grid
+ylim([0 max(G_mean+2E2)])
+% Set ticks
 % xticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
 % xticklabels({'','3d_d1s1t1','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
 
 %% Bar plot of fracture energy to height
 % 
 % % Subplot fracture energy of geometery
-% figure(2)
-% sgtitle('Fracture energy vs Height')
-% 
-% % Titles
-% tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
-% tph = split(tph);
-% 
-% G_sub = 0;
-% for k = 1:length(G_mean)
-% 
-%     if rem(k,3) == 0       
-%         subplot(2,4,k/3)
-%         G_sub = [G_mean(k-2),G_mean(k-1),G_mean(k)];
-%         bar(G_sub)
-%         xticklabels({'t=1','t=2','t=4'})
-%         ylabel('Fracture energy')
-% %         ylim([0 max(G_mean+1E3)])
-%         title(tph(k/3))
-%         grid
-%     end
-% end
+figure(2)
+sgtitle('Fracture energy vs Height')
+
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
+
+for k = 1:length(G_mean)
+
+    if rem(k,3) == 0       
+        subplot(2,4,k/3)
+        G_sub = [G_mean(k-2),G_mean(k-1),G_mean(k)];
+        bar(G_sub)
+        xticklabels({'t=1','t=2','t=4'})
+        ylabel('Fracture energy')
+%         ylim([0 max(G_mean+1E3)])
+        title(tph(k/3))
+        grid
+    end
+end
 
 
 
@@ -187,7 +186,6 @@ tph = split(tph);
 
 t = tiledlayout(2,4);
 title(t,'Fracture Energy vs Height')
-G_sub = 0;
 for i = 1:length(G)
     if rem(i,15)==0
         G_sub = G(i-14:i);
@@ -261,8 +259,7 @@ tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
 tph = split(tph);
 
 t = tiledlayout(2,4);
-title(t,'Norm Fracture Energy vs Height')
-G_sub = 0;
+title(t,'Fracture Energy vs Normalized Height')
 for i = 1:length(G)
     if rem(i,15)==0
         G_sub = G(i-14:i);
@@ -277,18 +274,18 @@ for i = 1:length(G)
     end
 end
 
-print('Fracture_energy_boxplot_vs_Height_Norm', '-depsc');  
-
-
-
+print('Fracture_energy_boxplot_vs_Norm_Height', '-depsc');  
 
 
 
 %% box normalized vs spacing
 figure(9)
 
+tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
+tph = split(tph);
+
 t = tiledlayout(2,3);
-title(t,'Norm Fracture Energy vs Spacing')
+title(t,'Fracture Energy vs Normalized Spacing')
 
 for i = 1:length(G_mod)/3
     if i < 18
@@ -317,5 +314,83 @@ for i = 1:length(G_mod)/3
     end
 end
 
-print('Fracture_energy_boxplot_vs_Spacing', '-depsc');  
+print('Fracture_energy_boxplot_vs_Norm_Spacing', '-depsc'); 
+
+
+%% Width normlized vs normlized height 
+
+figure(10)
+
+% Titles
+tph = ('3Dd1s1 d1s1 d1s2 d1s4 d2s1 d2s2 d2s4');
+tph = split(tph);
+
+t = tiledlayout(2,4);
+title(t,'Normalized Width Fracture Energy vs Height')
+G_sub = 0;
+for i = 1:length(G)
+    if rem(i,15)==0
+        G_sub = G(i-14:i);
+        % Apply norm coefficients height
+        G_sub(6:10) = G_sub(6:10) * norm_cof.t_2v;
+        G_sub(11:14) = G_sub(11:14) * norm_cof.t_4v;
+        if i < 46
+            % Apply norm coefficients width
+            G_sub = G_sub * norm_cof.d_2v;
+        end
+        nexttile
+        boxchart(tn,G_sub,'MarkerStyle','x')
+        title(tph(i/15))
+        xlabel('Height [mm]')
+        grid
+    end
+end
+
+print('Fracture_energy_boxplot_vs_Height_Norm_Width', '-depsc'); 
+
+
+
+%% Width normlized vs normlized Spacing
+
+figure(11)
+
+% Titles
+tph = ('d1t1 d1t2 d1t4 d2t1 d2t2 d2t4');
+tph = split(tph);
+
+t = tiledlayout(2,3);
+title(t,'Normalized width Fracture Energy vs Spacing')
+
+for i = 1:length(G_mod)/3
+    if i < 18
+        if rem(i,5)==0
+            nexttile
+            G_subn = [G_mod(i-4:i),G_mod(i+15-4:i+15)*norm_cof.s_2v,G_mod(i+30-4:i+30)*norm_cof.s_4v];
+            G_subn = G_subn * norm_cof.d_2v;
+            boxchart(sn,G_subn,'MarkerStyle','x')
+            title(tph(i/5))
+            xlabel('Spacing [mm]')
+            ylabel('Fracture energy')
+            grid
+        end
+
+    elseif i > 19
+
+        if rem(i,5)==0
+            nexttile
+            G_subn = [G_mod(i-4+30:i+30),G_mod(i+15-4+30:i+15+30)...
+                *norm_cof.s_2v,G_mod(i+30-4+30:i+30+30)*norm_cof.s_4v];
+            boxchart(sn,G_subn,'MarkerStyle','x')
+            title(tph(i/5))
+            xlabel('Spacing [mm]')
+            ylabel('Fracture energy')
+            grid
+        end
+    end
+end
+
+
+
+print('Fracture_energy_boxplot_vs_Spacing_Norm_Width', '-depsc'); 
+
 
