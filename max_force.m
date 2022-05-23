@@ -367,44 +367,50 @@ t = tiledlayout(2,3);
 
 nexttile
 boxchart(s,t1d1,'markerstyle','x');
-title('height = 1 [mm] & width = 1 [mm]')
+title('t = 1 [mm] & d = 1 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 
 boxchart(s,t2d1,'markerstyle','x');
-title('height = 2 [mm] & width = 1 [mm]')
+title('t = 2 [mm] & d = 1 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture[N]')
+grid on
 
 nexttile
 boxchart(s,t4d1,'markerstyle','x');
-title('height = 4 [mm] & width = 1 [mm]')
+title('t = 4 [mm] & d = 1 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
 sgtitle('Width = 1 [mm]')
+grid on
 
 % d = 2
 nexttile
 boxchart(s,t1d2,'markerstyle','x')
-title('height = 1 [mm] & width = 2 [mm]')
+title('t = 1 [mm] & d = 2 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,t2d2,'markerstyle','x')
-title('height = 2 [mm] & width = 2 [mm]')
+title('t = 2 [mm] & d = 2 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,t4d2,'markerstyle','x')
-title('height = 4 [mm] & width = 2 [mm]')
+title('t = 4 [mm] & d = 2 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
-title(t,'Max force vs spacing')
-
+ylabel('load at fracture [N]')
+title(t,'Load at fracture vs Spacing')
+grid on
+print('mfs', '-depsc')
 %% box plot of 3D samples
 figure(6)
 
@@ -429,9 +435,10 @@ x6 = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
 
 t = tiledlayout(2,3);
 boxchart(x6,max_f3D,'markerstyle','x')
-title(t,'3D max force')
+title(t,'3D load at fracture')
 xlabel('height [mm]')
-ylabel('max force applied [N]')
+ylabel('load at fracture [N]')
+grid on
 hold off
 
 %% Means
@@ -483,15 +490,14 @@ f3Dt4(f3Dt4==0) = nan;
 
 
 figure(1)
-title('3D max force')
-stem(x,f3Dt1)
+bar(x,f3Dt1,'b')
 hold on
-stem(x,f3Dt2)
-stem(x,f3Dt4)
-legend('3Dt1','3Dt2','3Dt4')
+bar(x,f3Dt2,'b')
+bar(x,f3Dt4,'b')
 xlim([0 4])
 xlabel('height')
-ylabel('maximum load applied [N]')
+ylabel('max force [N]')
+title('3D Load at fracture vs Height')
 grid on
 hold off
 
@@ -543,10 +549,11 @@ stem3(x,y2,d1s2t4)
 stem3(x,y4,d1s4t1)
 stem3(x,y4,d1s4t2)
 stem3(x,y4,d1s4t4)
-title('2D max force - d1 - Small pillar width')
+title('2D Load at fracture - Width = 1 [mm]')
 xlabel('height')
 ylabel('spacing')
 hold off
+
 
 % 2D - d2
 d2s1t1 = zeros(1,3);
@@ -599,7 +606,7 @@ stem3(x,y4,d2s4t1)
 stem3(x,y4,d2s4t2)
 stem3(x,y4,d2s4t4)
 
-title('2D max force - d2 - Large pillar width')
+title('2D Load at fracture - Width = 2 [mm]')
 xlabel('height')
 ylabel('spacing')
 
@@ -654,7 +661,8 @@ v1 = split(v1);
 %x4 = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18];
 bar(variance(1:9))
 xticklabels(v1)
-title('Variance of max force - d1 - Width [1 mm] ')
+title('Variance of load at fracture - d1 - Width [1 mm] ')
+grid on
 hold off
 
 % d2
@@ -663,7 +671,8 @@ v2 = ('s1t1 s1t2 s1t4 s2t1 s2t2 s2t4 s4t1 s4t2 s4t4');
 v2 = split(v2);
 bar(variance(10:18))
 xticklabels(v2)
-title('Variance of max force - d2 - Width [2 mm]')
+title('Variance of load at fracture - d2 - Width [2 mm]')
+grid on
 hold off
 
 %% Normalizing max force w.r.t material used
@@ -709,7 +718,7 @@ for i = 6:15
     end
 end
       
-% plot Variation in s 
+% normalized plot Variation in s 
 s = [1 1 1 1 1 2 2 2 2 2 4 4 4 4 4];
 figure(9)
 % d = 1
@@ -717,43 +726,50 @@ t = tiledlayout(2,3);
 
 nexttile
 boxchart(s,t1d1,'markerstyle','x');
-title('height = 1 [mm]')
+title('t = 1 [mm] & d = 1 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 
 boxchart(s,t2d1,'markerstyle','x');
-title('height = 2 [mm]')
+title('t = 2 [mm] & d = 1 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,t4d1,'markerstyle','x');
-title('height = 4 [mm]')
+title('t = 4 [mm] & d = 1 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
 sgtitle('Width = 1 [mm]')
+grid on
 
 % d = 2
 nexttile
 boxchart(s,t1d2,'markerstyle','x')
-title('height = 1 [mm]')
+title('t = 1 [mm] & d = 2 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,t2d2,'markerstyle','x')
-title('height = 2 [mm]')
+title('t = 2 [mm] & d = 2 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,t4d2,'markerstyle','x')
-title('height = 4 [mm]')
+title('t = 4 [mm] & d = 2 [mm]')
 xlabel('spacing [mm]')
-ylabel('max force [N]')
-title(t,'Normalized max force vs spacing')
+ylabel('load at fracture [N]')
+title(t,'Normalized load at fracture vs Spacing')
+grid on
+print('nmfs', '-depsc')
 
 % plot variation in t
 figure(10)
@@ -762,43 +778,50 @@ t = tiledlayout(2,3);
 
 nexttile
 boxchart(s,s1d1,'markerstyle','x');
-title('height = 1 [mm] & width = 2 [mm]')
+title('t = 1 [mm] & d = 1 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 
 boxchart(s,s2d1,'markerstyle','x');
-title('height = 2 [mm] & width = 1 [mm]')
+title('t = 2 [mm] & d = 1 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,s4d1,'markerstyle','x');
-title('height = 4 [mm] & width = 1 [mm]')
+title('t = 4 [mm] & d = 1 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
 sgtitle('Width = 1 [mm]')
+grid on
 
 % d = 2
 nexttile
 boxchart(s,s1d2,'markerstyle','x')
-title('spacing = 1 [mm] & width = 2 [mm]')
+title('s = 1 [mm] & d = 2 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,s2d2,'markerstyle','x')
-title('spacing = 2 [mm] & width = 2 [mm]')
+title('s = 2 [mm] & d = 2 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,s4d2,'markerstyle','x')
-title('spacing = 4 [mm] & width = 2 [mm]')
+title('s = 4 [mm] & d = 2 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
-title(t,'Max force vs height')
+ylabel('load at fracture [N]')
+title(t,'Load at fracture vs Height')
+grid on
+print('mfh', '-depsc')
 
 % Variation in height
 t = [1 2 4];
@@ -844,40 +867,48 @@ t = tiledlayout(2,3);
 
 nexttile
 boxchart(s,s1d1,'markerstyle','x');
-title('height = 1 [mm] & width = 1 [mm]')
+title('t = 1 [mm] & d = 1 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 
 boxchart(s,s2d1,'markerstyle','x');
-title('height = 2 [mm] & width = 1 [mm]')
+title('t = 2 [mm] & d = 1 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
+grid on
 
 nexttile
 boxchart(s,s4d1,'markerstyle','x');
-title('height = 4 [mm] & width = 1 [mm]')
+title('t = 4 [mm] & d = 1 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
 sgtitle('Width = 1 [mm]')
+grid on
 
 % d = 2
 nexttile
 boxchart(s,s1d2,'markerstyle','x')
-title('spacing = 1 [mm] & width = 2 [mm]')
+title('s = 1 [mm] & d = 2 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,s2d2,'markerstyle','x')
-title('spacing = 2 [mm] & width = 2 [mm]')
+title('s = 2 [mm] & d = 2 [mm]')
 xlabel('height [mm]')
-ylabel('max force [N]')
+ylabel('load at fracture [N]')
+grid on
 
 nexttile
 boxchart(s,s4d2,'markerstyle','x')
-title('spacing = 4 [mm] & width = 2 [mm]')
+title('s = 4 [mm] & d = 2 [mm]')
 xlabel('height [mm]')
 ylabel('max force [N]')
-title(t,'Normalized max force vs height')
+title(t,'Normalized load at fracture vs Height')
+grid on
+
+print('nmfh', '-depsc')
