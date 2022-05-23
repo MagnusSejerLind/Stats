@@ -273,7 +273,7 @@ plot(extension_vec,mean_linereg3a*extension_vec+mean_linereg3b)
 hold off
 grid on
 title('2D linear regression of the elastic region','Varying pillar height | d=1 [mm] s=2 [mm]')
-legend('t = 1[mm] | k = 124.82[N/mm]','t = 2[mm] | k = 125.68[N/mm]','t = 4[mm] | k = 109.87[N/mm]',Location='southeast')
+legend('t = 1[mm] | k = 266.3[N/mm]','t = 2[mm] | k = 315.1[N/mm]','t = 4[mm] | k = 187.02[N/mm]',Location='southeast')
 xlabel('Extension [mm]')
 ylabel('Load [N]')
 

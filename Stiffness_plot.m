@@ -21,6 +21,6 @@ plot(t,[mean_linereg1a_s2 mean_linereg2a_s2 mean_linereg3a_s2],'bo--')
 plot(t,[mean_linereg1a_s4 mean_linereg2a_s4 mean_linereg3a_s4],'ko--')
 grid on
 xlabel('Height t [mm]')
-ylabel('k')
+ylabel('Stiffness k [N/mm]')
 legend('s = 1','s = 2','s = 4','Location','best')
 hold off
