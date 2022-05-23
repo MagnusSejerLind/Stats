@@ -6,7 +6,7 @@ mean_linereg3a_s1 = 366.505;
 
 mean_linereg1a_s2 = 266.29;
 mean_linereg2a_s2 = 315.11;
-mean_linereg3a_s2 = 187.0151;
+mean_linereg3a_s2 = 187.015;
 
 mean_linereg1a_s4 = 207.7;
 mean_linereg2a_s4 = 304.63;
