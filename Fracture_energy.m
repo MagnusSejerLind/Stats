@@ -194,6 +194,7 @@ for i = 1:length(G)
 %         boxplot(G_sub,no)
         title(tph(i/15))
         xlabel('Height [mm]')
+        xticks([1 2 3 4 5])
         grid
     end
 end
@@ -226,6 +227,7 @@ for i = 1:length(G_mod)/3
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
+            xticks([1 2 3 4 5])
             grid
         end
 
@@ -238,6 +240,7 @@ for i = 1:length(G_mod)/3
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
+            xticks([1 2 3 4 5])
             grid
         end
     end
@@ -270,6 +273,7 @@ for i = 1:length(G)
         boxchart(tn,G_sub,'MarkerStyle','x')
         title(tph(i/15))
         xlabel('Height [mm]')
+        xticks([1 2 3 4 5])
         grid
     end
 end
@@ -296,6 +300,7 @@ for i = 1:length(G_mod)/3
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
+            xticks([1 2 3 4 5])
             grid
         end
 
@@ -309,6 +314,7 @@ for i = 1:length(G_mod)/3
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
+            xticks([1 2 3 4 5])
             grid
         end
     end
@@ -317,7 +323,7 @@ end
 print('Fracture_energy_boxplot_vs_Norm_Spacing', '-depsc'); 
 
 
-%% Width normlized vs normlized height 
+%% Width normalized vs normalized height 
 
 figure(10)
 
@@ -342,6 +348,7 @@ for i = 1:length(G)
         boxchart(tn,G_sub,'MarkerStyle','x')
         title(tph(i/15))
         xlabel('Height [mm]')
+        xticks([1 2 3 4 5])
         grid
     end
 end
@@ -350,7 +357,7 @@ print('Fracture_energy_boxplot_vs_Height_Norm_Width', '-depsc');
 
 
 
-%% Width normlized vs normlized Spacing
+%% Width normalized vs normalized Spacing
 
 figure(11)
 
@@ -371,6 +378,7 @@ for i = 1:length(G_mod)/3
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
+            xticks([1 2 3 4 5])
             grid
         end
 
@@ -384,6 +392,7 @@ for i = 1:length(G_mod)/3
             title(tph(i/5))
             xlabel('Spacing [mm]')
             ylabel('Fracture energy')
+            xticks([1 2 3 4 5])
             grid
         end
     end
