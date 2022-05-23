@@ -8,7 +8,7 @@ test_d1 = exp(:,16:60);
 test_d2 = exp(:,61:105);
 
 
-%plot(test_3d(14).data(:,3),test_3d(14).data(:,1))
+%plot(test_3d(14).data(:,3),test_3d(14).data(:,1))%
 
 extension_vec = linspace(0,1,100000);
  
